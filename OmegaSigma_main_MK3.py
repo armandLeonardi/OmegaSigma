@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Dec  6 14:18:03 2018
+Created on Thu May 16 15:11:15 2019
 
+@author: X188212
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Dec  6 14:18:03 2018
 @author: Marsupilami
 """
 
 from math import *
 
-class country:
+class Country:
     
     version = "2.0"
     
@@ -78,7 +84,7 @@ class country:
 
 class OmegaSigma:
     
-    version = "2.0"
+    version = "2.1"
     
     player1 = False
     player2 = False
@@ -93,27 +99,62 @@ class OmegaSigma:
         print("Start OMEGA_SIGMA ¦ 1")
         print("Settings ¦ 2")
         choice = int(input("In [OS]: "))
+        continu = True
+        
+        while continu:
+            if choice == 1:
+                k = True
+                while k:
+                    try:
+                        print("Create player1 :")
+                        name_country1 = input("In [OS]: Player1 country name : ")
+                        pop_country1 = int(input("In [OS]: Player1 total population : "))
+                        self.player1 =  Country(name_country1,pop_country1)
+                    
+                        print("Create player2 :")
+                        name_country2 = input("In [OS]: Player2 country name : ")
+                        pop_country2 = int(input("In [OS]: Player2 total population : "))
+                        self.player2 =  Country(name_country2,pop_country2)
+                        k = False
+                    except:
+                        print("Error for players creation. Please try again.",end="\n")
                 
-        if choice == 1:
-            print("Create player1 :")
-            name_country1 = input("In [OS]: Player1 country name : ")
-            pop_country1 = int(input("In [OS]: Player1 total population : "))
-            self.player1 =  OmegaSigma_country_MK2.country(name_country1,pop_country1)
-            
-            print("Create player2 :")
-            name_country2 = input("In [OS]: Player2 country name : ")
-            pop_country2 = int(input("In [OS]: Player2 total population : "))
-            self.player2 =  OmegaSigma_country_MK2.country(name_country2,pop_country2)
-            
-            self.start()
-            self.t = 0
-            
-        else:
-            print(self.version)
-            print(self.alphaForce)
-            print(self.alphaMed)
-            print(self.t)
-            print(self.T)
+                self.start()
+                self.t = 0
+                
+                k = True
+                while k:
+                    following = input("New game ? [y/n] : ")
+                    if  following == 'n':
+                        continu = False
+                        k = False
+                    elif following == 'y':
+                        k = False
+                    else:
+                        print("Please select a right command")
+                        choice = 1
+                
+            elif choice == 2:
+                print("[Out] Version : ")
+                print(self.version)
+                
+                print("[Out] AlphaForce : ")
+                print(self.alphaForce)
+                
+                print("[Out] AlphaMed : ")
+                print(self.alphaMed)
+    
+                print("[Out] t : ")
+                print(self.t)
+                
+                print("[Out] T : ")
+                print(self.T)
+                
+                choice = int(input("In [OS]: "))
+                
+            else:
+                print("Please enter a write command.")
+                choice = int(input("In [OS]: "))
     
     def computeMilForce(self,player):
         return self.alphaForce*player.pop_mil + player.sigma_mil
